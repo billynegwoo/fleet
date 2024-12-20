@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { employeeRouter } from "./routes/employees";
-import { deviceRouter } from "./routes/devices";
+import employeeRouter from "./routes/employees";
+import deviceRouter from "./routes/devices";
 
 const app = express();
 const port = process.env.EXPRESS_PORT ?? 3001;

@@ -1,7 +1,10 @@
 import { useDevices } from "~/contexts/DeviceContext";
 
 export default function DeviceTable() {
-  const { devices, deleteDevice, setEditingDevice } = useDevices();
+  const { devices, typeFilter, setEditingDevice, deleteDevice } = useDevices();
+  const filteredDevices = typeFilter
+    ? devices.filter(device => device.type === typeFilter)
+    : devices;
 
   return (
     <div className="overflow-x-auto rounded-lg border">
@@ -35,7 +38,7 @@ export default function DeviceTable() {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
-          {devices.map((device) => (
+          {filteredDevices.map((device) => (
             <tr key={device.id} className="hover:bg-gray-50">
               <td className="whitespace-nowrap px-6 py-4">
                 <div className="font-medium text-gray-900">{device.name}</div>
@@ -62,7 +65,7 @@ export default function DeviceTable() {
               </td>
             </tr>
           ))}
-          {devices.length === 0 && (
+          {filteredDevices.length === 0 && (
             <tr>
               <td colSpan={4} className="px-6 py-4 text-center text-gray-500">
                 No devices found

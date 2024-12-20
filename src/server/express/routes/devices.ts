@@ -5,7 +5,11 @@ const router = Router();
 
 router.get('/', async (req, res) => {
   try {
-    const devices = await db.device.findMany();
+    const devices = await db.device.findMany({
+      include: {
+        employee: true,
+      },
+    });
     return res.status(200).json(devices);
   } catch (_error) {
     return res.status(500).json({ message: 'Failed to fetch devices' });

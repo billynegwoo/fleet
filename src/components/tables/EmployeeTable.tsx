@@ -1,7 +1,11 @@
 import { useEmployees } from "~/contexts/EmployeeContext";
 
 export default function EmployeeTable() {
-  const { employees, deleteEmployee, setEditingEmployee } = useEmployees();
+  const { employees, roleFilter, deleteEmployee, setEditingEmployee } = useEmployees();
+  
+  const filteredEmployees = roleFilter
+    ? employees.filter(employee => employee.role === roleFilter)
+    : employees;
 
   return (
     <div className="overflow-x-auto rounded-lg border">
@@ -35,7 +39,7 @@ export default function EmployeeTable() {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
-          {employees.map((employee) => (
+          {filteredEmployees.map((employee) => (
             <tr key={employee.id} className="hover:bg-gray-50">
               <td className="whitespace-nowrap px-6 py-4">
                 <div className="font-medium text-gray-900">{employee.name}</div>
@@ -62,7 +66,7 @@ export default function EmployeeTable() {
               </td>
             </tr>
           ))}
-          {employees.length === 0 && (
+          {filteredEmployees.length === 0 && (
             <tr>
               <td colSpan={4} className="px-6 py-4 text-center text-gray-500">
                 No employees found
