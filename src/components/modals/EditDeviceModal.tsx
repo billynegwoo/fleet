@@ -16,7 +16,9 @@ export default function EditDeviceModal() {
     updateDevice(editingDevice.id, {
       name: formData.get("name") as string,
       type: formData.get("type") as string,
-      employeeId: formData.get("employeeId") as string,
+      employeeId: formData.get("employeeId")
+        ? Number(formData.get("employeeId"))
+        : null,
     });
   };
 
