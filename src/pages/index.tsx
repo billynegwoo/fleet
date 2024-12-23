@@ -17,11 +17,10 @@ export default function HomePage() {
           Fleet Management System
         </h1>
         
-        <p className="mb-8 text-xl text-gray-600 dark:text-steampunk-text/80">
+        <p className="mb-8 text-xl text-gray-600 dark:text-steampunk-text">
           Streamline your company's resource management with our comprehensive solution
         </p>
 
-        {/* Stats/Overview Section */}
         <div className="mb-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {[
             { label: 'Total Employees', value: employeeCount },
@@ -32,7 +31,7 @@ export default function HomePage() {
               className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm 
                        dark:border-steampunk-border dark:bg-steampunk-surface"
             >
-              <dt className="text-sm font-medium text-gray-600 dark:text-steampunk-text/80">
+              <dt className="text-sm font-medium text-gray-600 dark:text-steampunk-text">
                 {stat.label}
               </dt>
               <dd className="mt-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-steampunk-text">
@@ -41,8 +40,6 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-
-        {/* Action Buttons */}
         <div className="space-x-4">
           <Link
             href="/employees"
