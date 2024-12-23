@@ -42,6 +42,10 @@ export function EmployeeProvider({ children }: { children: ReactNode }) {
   const { data: employees = [], isLoading, refetch } = useQuery({
     queryKey: ["employees"],
     queryFn: fetchEmployees,
+    staleTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true
   });
 
   const [roleFilter, setRoleFilter] = useState("");

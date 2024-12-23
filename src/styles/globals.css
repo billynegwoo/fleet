@@ -4,16 +4,48 @@
 
 @layer base {
   :root {
-    @apply bg-white text-gray-900;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --ring: 240 5% 64.9%;
+    --muted: 240 3.8% 46.1%;
+
+    
+    --gray-200: #E5E7EB;
+    --gray-900: #111827;
+    --green-500: #22C55E;
+    --red-500: #EF4444;
   }
 
   .dark {
-    @apply bg-steampunk-background text-steampunk-text;
+    --background: 25 15% 9%;  
+    --foreground: 45 74% 53%; 
+    --primary: 25 74% 31%;
+    --primary-foreground: 45 74% 53%;
+    --accent: 25 20% 13%; 
+    --accent-foreground: 45 74% 53%; 
+    --ring: 25 74% 31%; 
+    
+    --steampunk-primary: #8B4513;
+    --steampunk-secondary: #CD853F;
+    --steampunk-accent: #DAA520;
+    --steampunk-background: #1A1412;
+    --steampunk-surface: #2C1810;
+    --steampunk-text: #D4AF37;
+    --steampunk-border: #8B4513;
+    --steampunk-hover: #A0522D;
   }
 
-  .dark body {
-    background-repeat: repeat;
-    background-size: 200px;
+  input::placeholder {
+    @apply text-muted/50;
+  }
+
+  .dark input::placeholder {
+    color: var(--steampunk-text);
+    opacity: 0.7;
   }
 }
 
@@ -34,4 +66,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
 }

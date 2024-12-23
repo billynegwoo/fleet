@@ -24,7 +24,7 @@ export default function EditEmployeeModal() {
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="edit-name" className="block text-sm font-medium">
+          <label htmlFor="edit-name" className="block text-sm font-medium text-gray-700 dark:text-steampunk-text">
             Employee Name
           </label>
           <input
@@ -33,12 +33,16 @@ export default function EditEmployeeModal() {
             name="name"
             defaultValue={editingEmployee?.name}
             required
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+            className="mt-1 block h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-gray-900
+                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                     dark:border-steampunk-border dark:bg-steampunk-background 
+                     dark:text-steampunk-text dark:focus:ring-steampunk-accent 
+                     dark:focus:ring-offset-steampunk-background"
           />
         </div>
 
         <div>
-          <label htmlFor="edit-role" className="block text-sm font-medium">
+          <label htmlFor="edit-role" className="block text-sm font-medium text-gray-700 dark:text-steampunk-text">
             Role
           </label>
           <select
@@ -46,10 +50,18 @@ export default function EditEmployeeModal() {
             name="role"
             defaultValue={editingEmployee?.role}
             required
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+            className="mt-1 block h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-gray-900
+                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                     dark:border-steampunk-border dark:bg-steampunk-background 
+                     dark:text-steampunk-text dark:focus:ring-steampunk-accent 
+                     dark:focus:ring-offset-steampunk-background"
           >
             {EMPLOYEE_ROLES.map((role) => (
-              <option key={role} value={role}>
+              <option 
+                key={role} 
+                value={role}
+                className="bg-white text-gray-900 dark:bg-steampunk-background dark:text-steampunk-text"
+              >
                 {role}
               </option>
             ))}
@@ -60,13 +72,13 @@ export default function EditEmployeeModal() {
           <button
             type="button"
             onClick={() => setEditingEmployee(null)}
-            className="rounded-md border px-4 py-2 hover:bg-gray-50"
+            className="rounded-md border px-4 py-2 hover:bg-gray-50 dark:border-steampunk-border dark:hover:bg-steampunk-background"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+            className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 dark:bg-steampunk-primary dark:text-steampunk-text dark:hover:bg-steampunk-hover"
           >
             Save Changes
           </button>

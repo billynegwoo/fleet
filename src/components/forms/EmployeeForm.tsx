@@ -32,9 +32,12 @@ export default function EmployeeForm() {
             name="name"
             id="name"
             required
-            className="mt-1 block h-10 w-full rounded-md border border-gray-300 px-3 
-                     dark:border-steampunk-border dark:bg-steampunk-background dark:text-steampunk-text
-                     dark:placeholder-steampunk-text/50 focus:border-steampunk-accent focus:ring-steampunk-accent"
+            className="mt-1 block h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-gray-900
+                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                     dark:border-steampunk-border dark:bg-steampunk-background 
+                     dark:text-steampunk-text dark:focus:ring-steampunk-accent 
+                     dark:focus:ring-offset-steampunk-background
+                     placeholder:text-gray-400 dark:placeholder:text-steampunk-text/50"
             placeholder="Employee name"
           />
         </div>
@@ -50,16 +53,18 @@ export default function EmployeeForm() {
             name="role"
             id="role"
             required
-            className="mt-1 block h-10 w-full rounded-md border border-gray-300 px-3
-                     dark:border-steampunk-border dark:bg-steampunk-background dark:text-steampunk-text
-                     focus:border-steampunk-accent focus:ring-steampunk-accent"
+            className="mt-1 block h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-gray-900
+                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                     dark:border-steampunk-border dark:bg-steampunk-background 
+                     dark:text-steampunk-text dark:focus:ring-steampunk-accent 
+                     dark:focus:ring-offset-steampunk-background"
           >
-            <option value="" className="dark:bg-steampunk-background">Select a role...</option>
+            <option value="" className="bg-white text-gray-900 dark:bg-steampunk-background dark:text-steampunk-text">Select a role...</option>
             {employeeRoles.map((role) => (
               <option 
                 key={role} 
                 value={role}
-                className="dark:bg-steampunk-background"
+                className="bg-white text-gray-900 dark:bg-steampunk-background dark:text-steampunk-text"
               >
                 {role}
               </option>

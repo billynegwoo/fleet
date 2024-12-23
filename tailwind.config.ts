@@ -2,7 +2,7 @@ import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
-  content: ["./src/**/*.tsx"],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: 'class',
   theme: {
     extend: {
@@ -11,16 +11,28 @@ export default {
         steampunk: ['Cinzel Decorative', 'serif'],
       },
       colors: {
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        muted: 'hsl(var(--muted))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        ring: 'hsl(var(--ring))',
         steampunk: {
-          primary: '#8B4513',
-          secondary: '#CD853F',
-          accent: '#DAA520',
-          background: '#1A1412',
-          surface: '#2C1810',
-          text: '#D4AF37',
-          border: '#8B4513',
-          hover: '#A0522D',
-          gear: '#CD853F',
+          primary: 'var(--steampunk-primary)',
+          secondary: 'var(--steampunk-secondary)',
+          accent: 'var(--steampunk-accent)',
+          background: 'var(--steampunk-background)',
+          surface: 'var(--steampunk-surface)',
+          text: 'var(--steampunk-text)',
+          border: 'var(--steampunk-border)',
+          hover: 'var(--steampunk-hover)',
+          gear: 'var(--steampunk-secondary)',
         },
       },
       backgroundImage: {

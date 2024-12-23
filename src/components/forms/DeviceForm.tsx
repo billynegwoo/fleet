@@ -34,9 +34,11 @@ export default function DeviceForm() {
             name="name"
             id="name"
             required
-            className="mt-1 block h-10 w-full rounded-md border border-gray-300 px-3 
-                     dark:border-steampunk-border dark:bg-steampunk-background dark:text-steampunk-text
-                     dark:placeholder-steampunk-text/50 focus:border-steampunk-accent focus:ring-steampunk-accent"
+            className="mt-1 block h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-gray-900
+                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                     dark:border-steampunk-border dark:bg-steampunk-background 
+                     dark:text-steampunk-text dark:focus:ring-steampunk-accent 
+                     dark:focus:ring-offset-steampunk-background"
           />
         </div>
 
@@ -48,12 +50,19 @@ export default function DeviceForm() {
             name="type"
             id="type"
             required
-            className="mt-1 block h-10 w-full rounded-md border border-gray-300 px-3
-                     dark:border-steampunk-border dark:bg-steampunk-background dark:text-steampunk-text"
+            className="mt-1 block h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-gray-900
+                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                     dark:border-steampunk-border dark:bg-steampunk-background 
+                     dark:text-steampunk-text dark:focus:ring-steampunk-accent 
+                     dark:focus:ring-offset-steampunk-background"
           >
-            <option value="">Select a type...</option>
+            <option value="" className="bg-white text-gray-900 dark:bg-steampunk-background dark:text-steampunk-text">Select a type...</option>
             {['Laptop', 'Display', 'Peripheral', 'Phone'].map((type) => (
-              <option key={type} value={type}>
+              <option 
+                key={type} 
+                value={type}
+                className="bg-white text-gray-900 dark:bg-steampunk-background dark:text-steampunk-text"
+              >
                 {type}
               </option>
             ))}
@@ -67,12 +76,19 @@ export default function DeviceForm() {
           <select
             name="employeeId"
             id="employeeId"
-            className="mt-1 block h-10 w-full rounded-md border border-gray-300 px-3
-                     dark:border-steampunk-border dark:bg-steampunk-background dark:text-steampunk-text"
+            className="mt-1 block h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-gray-900
+                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                     dark:border-steampunk-border dark:bg-steampunk-background 
+                     dark:text-steampunk-text dark:focus:ring-steampunk-accent 
+                     dark:focus:ring-offset-steampunk-background"
           >
-            <option value="">Unassigned</option>
+            <option value="" className="bg-white text-gray-900 dark:bg-steampunk-background dark:text-steampunk-text">Unassigned</option>
             {employees.map((employee) => (
-              <option key={employee.id} value={employee.id}>
+              <option 
+                key={employee.id} 
+                value={employee.id}
+                className="bg-white text-gray-900 dark:bg-steampunk-background dark:text-steampunk-text"
+              >
                 {employee.name}
               </option>
             ))}

@@ -21,6 +21,9 @@ router.post('/', async (req, res) => {
   try {
     const employee = await db.employee.create({
       data: { name, role },
+      include: {
+        devices: true
+      }
     });
     return res.status(201).json(employee);
   } catch (_error) {
@@ -35,6 +38,9 @@ router.put('/:id', async (req, res) => {
     const updatedEmployee = await db.employee.update({
       where: { id: Number(id) },
       data: { name, role },
+      include: {
+        devices: true
+      }
     });
     return res.status(200).json(updatedEmployee);
   } catch (_error) {

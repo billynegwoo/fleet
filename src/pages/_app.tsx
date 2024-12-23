@@ -5,32 +5,34 @@ import { DeviceProvider } from "~/contexts/DeviceContext";
 import { ThemeProvider } from "~/contexts/ThemeContext";
 import { type AppProps } from "next/app";
 import { GeistSans } from "geist/font/sans";
+import { ToasterWithTheme } from "~/components/ui/toaster";
 import "~/styles/globals.css";
-import { Toaster } from 'sonner'
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      refetchOnWindowFocus: false,
+      staleTime: 0,
+      refetchOnWindowFocus: true,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
     },
   },
 });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <Toaster position="top-right" richColors />
-        <EmployeeProvider>
-          <DeviceProvider>
-            <div className={GeistSans.className}>
+    <div className={`${GeistSans.variable} font-sans`}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <EmployeeProvider>
+            <DeviceProvider>
               <Component {...pageProps} />
-            </div>
-          </DeviceProvider>
-        </EmployeeProvider>
-        <ReactQueryDevtools initialIsOpen={false} />{" "}
-      </ThemeProvider>
-    </QueryClientProvider>
+              <ToasterWithTheme />
+            </DeviceProvider>
+          </EmployeeProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </div>
   );
 }

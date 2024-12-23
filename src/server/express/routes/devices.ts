@@ -21,6 +21,9 @@ router.post('/', async (req, res) => {
   try {
     const device = await db.device.create({
       data: { name, type, employeeId },
+      include: {
+        employee: true
+      }
     });
     return res.status(201).json(device);
   } catch (_error) {
@@ -32,13 +35,30 @@ router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { name, type, employeeId } = req.body;
   try {
+    const employee = await db.employee.findUnique({
+      where: { id: employeeId }
+    })
+
+    if (!employee) {
+      return res.status(404).json({ error: 'Employee not found' })
+    }
+
     const updatedDevice = await db.device.update({
       where: { id: Number(id) },
-      data: { name, type, employeeId },
-    });
-    return res.status(200).json(updatedDevice);
-  } catch (_error) {
-    return res.status(500).json({ message: 'Failed to update device' });
+      data: {
+        name,
+        type,
+        employeeId
+      },
+      include: {
+        employee: true
+      }
+    })
+
+    res.json(updatedDevice)
+  } catch (error) {
+    console.error('Error updating device:', error)
+    res.status(500).json({ error: 'Failed to update device' })
   }
 });
 

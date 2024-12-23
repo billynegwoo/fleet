@@ -57,6 +57,8 @@ export function DeviceProvider({ children }: { children: ReactNode }) {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['devices'] });
+      await queryClient.invalidateQueries({ queryKey: ['employees'] });
+      await queryClient.invalidateQueries({ queryKey: ['employeeCount'] });
       const form = document.getElementById("deviceForm") as HTMLFormElement;
       form?.reset();
       toast.success('Device created successfully')
@@ -72,6 +74,8 @@ export function DeviceProvider({ children }: { children: ReactNode }) {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['devices'] });
+      await queryClient.invalidateQueries({ queryKey: ['employees'] });
+      await queryClient.invalidateQueries({ queryKey: ['employeeCount'] });
       setEditingDevice(null);
       toast.success('Device updated successfully')
     },
@@ -86,6 +90,8 @@ export function DeviceProvider({ children }: { children: ReactNode }) {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["devices"] });
+      await queryClient.invalidateQueries({ queryKey: ["employees"] });
+      await queryClient.invalidateQueries({ queryKey: ['employeeCount'] });
       toast.success('Device deleted successfully')
     },
     onError: (error) => {
