@@ -55,3 +55,11 @@ export async function updateEmployee(
   }
   return response.json() as Promise<Employee>;
 }
+
+export async function fetchEmployeeCount(): Promise<{ count: number }> {
+  const response = await fetch(`${API_BASE}/employees/count`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch employee count");
+  }
+  return response.json() as Promise<{ count: number }>;
+}

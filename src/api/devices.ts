@@ -56,3 +56,11 @@ export async function updateDevice(
   }
   return response.json() as Promise<Device>;
 }
+
+export async function fetchDeviceCount(): Promise<{ count: number }> {
+  const response = await fetch(`${API_BASE}/devices/count`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch device count");
+  }
+  return response.json() as Promise<{ count: number }>;
+}

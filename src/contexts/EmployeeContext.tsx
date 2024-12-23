@@ -5,8 +5,10 @@ import {
   deleteEmployee,
   fetchEmployees,
   updateEmployee,
+  fetchEmployeeCount,
 } from "~/api/employees";
 import { type Employee } from "~/types";
+import { toast } from 'sonner'
 
 interface EmployeeContextType {
   employees: Employee[];
@@ -20,11 +22,19 @@ interface EmployeeContextType {
   setEditingEmployee: (employee: Employee | null) => void;
   employeeRoles: string[];
   refetch: () => void;
+  count: number;
 }
 
 const EmployeeContext = createContext<EmployeeContextType | undefined>(
   undefined,
 );
+
+function useEmployeeCount() {
+  return useQuery({
+    queryKey: ['employeeCount'],
+    queryFn: fetchEmployeeCount
+  })
+}
 
 export function EmployeeProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
@@ -45,7 +55,11 @@ export function EmployeeProvider({ children }: { children: ReactNode }) {
       await queryClient.invalidateQueries({ queryKey: ["employees"] });
       const form = document.getElementById("employeeForm") as HTMLFormElement;
       form?.reset();
+      toast.success('Employee created successfully')
     },
+    onError: (error) => {
+      toast.error(`Failed to create employee: ${error.message}`)
+    }
   });
 
   const updateMutation = useMutation<void, Error, { id: number; data: { name: string; role: string } }>({
@@ -55,7 +69,11 @@ export function EmployeeProvider({ children }: { children: ReactNode }) {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["employees"] });
       setEditingEmployee(null);
+      toast.success('Employee updated successfully')
     },
+    onError: (error) => {
+      toast.error(`Failed to update employee: ${error.message}`)
+    }
   });
 
   const deleteMutation = useMutation<void, Error, number>({
@@ -64,10 +82,16 @@ export function EmployeeProvider({ children }: { children: ReactNode }) {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["employees"] });
+      toast.success('Employee deleted successfully')
     },
+    onError: (error) => {
+      toast.error(`Failed to delete employee: ${error.message}`)
+    }
   });
 
   const employeeRoles = ["Developer", "Designer", "Manager", "HR"];
+
+  const { data: countData } = useEmployeeCount()
 
   const value = {
     employees,
@@ -85,6 +109,7 @@ export function EmployeeProvider({ children }: { children: ReactNode }) {
     setEditingEmployee,
     employeeRoles,
     refetch,
+    count: countData?.count ?? 0,
   };
 
   return (

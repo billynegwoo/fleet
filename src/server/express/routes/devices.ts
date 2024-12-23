@@ -3,7 +3,7 @@ import { db } from '~/server/db';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_req, res) => {
   try {
     const devices = await db.device.findMany({
       include: {
@@ -48,10 +48,19 @@ router.delete('/:id', async (req, res) => {
     await db.device.delete({
       where: { id: Number(id) },
     });
-    return res.status(204).send(); // No content
+    return res.status(204).send(); 
   } catch (_error) {
     return res.status(500).json({ message: 'Failed to delete device' });
   }
 });
+
+router.get('/count', async (_req, res) => {
+  try {
+    const count = await db.device.count()
+    return res.status(200).json({ count })
+  } catch (_error) {
+    return res.status(500).json({ message: 'Failed to fetch device count' })
+  }
+})
 
 export default router;

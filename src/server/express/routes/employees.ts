@@ -3,7 +3,7 @@ import { db } from '~/server/db';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_req, res) => {
   try {
     const employees = await db.employee.findMany({
       include: {
@@ -53,5 +53,14 @@ router.delete('/:id', async (req, res) => {
     return res.status(500).json({ message: 'Failed to delete employee' });
   }
 });
+
+router.get('/count', async (_req, res) => {
+  try {
+    const count = await db.employee.count()
+    return res.status(200).json({ count })
+  } catch (_error) {
+    return res.status(500).json({ message: 'Failed to fetch employee count' })
+  }
+})
 
 export default router;

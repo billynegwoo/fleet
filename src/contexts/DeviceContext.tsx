@@ -5,8 +5,10 @@ import {
   deleteDevice,
   fetchDevices,
   updateDevice,
+  fetchDeviceCount,
 } from "~/api/devices";
 import { type Device } from "~/types";
+import { toast } from 'sonner'
 
 interface DeviceContextType {
   devices: Device[];
@@ -26,9 +28,17 @@ interface DeviceContextType {
   editingDevice: Device | null;
   setEditingDevice: (device: Device | null) => void;
   deviceTypes: string[];
+  count: number;
 }
 
 const DeviceContext = createContext<DeviceContextType | undefined>(undefined);
+
+function useDeviceCount() {
+  return useQuery({
+    queryKey: ['deviceCount'],
+    queryFn: fetchDeviceCount
+  })
+}
 
 export function DeviceProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
@@ -49,7 +59,11 @@ export function DeviceProvider({ children }: { children: ReactNode }) {
       await queryClient.invalidateQueries({ queryKey: ['devices'] });
       const form = document.getElementById("deviceForm") as HTMLFormElement;
       form?.reset();
+      toast.success('Device created successfully')
     },
+    onError: (error) => {
+      toast.error(`Failed to create device: ${error.message}`)
+    }
   });
 
   const updateMutation = useMutation<void, Error, { id: number; data: { name: string; type: string; employeeId: number | null } }>({
@@ -59,7 +73,11 @@ export function DeviceProvider({ children }: { children: ReactNode }) {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['devices'] });
       setEditingDevice(null);
+      toast.success('Device updated successfully')
     },
+    onError: (error) => {
+      toast.error(`Failed to update device: ${error.message}`)
+    }
   });
 
   const deleteMutation = useMutation<void, Error, number>({
@@ -68,10 +86,16 @@ export function DeviceProvider({ children }: { children: ReactNode }) {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["devices"] });
+      toast.success('Device deleted successfully')
     },
+    onError: (error) => {
+      toast.error(`Failed to delete device: ${error.message}`)
+    }
   });
 
   const deviceTypes = ["Laptop", "Display", "Peripheral", "Phone"];
+
+  const { data: countData } = useDeviceCount()
 
   const value = {
     devices,
@@ -90,6 +114,7 @@ export function DeviceProvider({ children }: { children: ReactNode }) {
     editingDevice,
     setEditingDevice,
     deviceTypes,
+    count: countData?.count ?? 0,
   };
 
   return (
