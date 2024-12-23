@@ -6,7 +6,7 @@ import DeviceFilter from "~/components/filters/DeviceFilter";
 import { useDevices } from "~/contexts/DeviceContext";
 
 export default function DevicesPage() {
-  const { isLoading, editingDevice } = useDevices();
+  const { editingDevice } = useDevices();
 
   return (
     <Layout title="Devices">
@@ -14,11 +14,7 @@ export default function DevicesPage() {
         <h2 className="text-2xl font-semibold">Devices</h2>
         <DeviceForm />
         <DeviceFilter />
-        {isLoading ? (
-          <div className="text-center">Loading...</div>
-        ) : (
-          <DeviceTable />
-        )}
+        <DeviceTable />
         {editingDevice && <EditDeviceModal />}
       </div>
     </Layout>

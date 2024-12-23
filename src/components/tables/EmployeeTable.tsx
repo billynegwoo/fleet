@@ -3,7 +3,7 @@ import { useEmployees } from '~/contexts/EmployeeContext'
 import { Employee } from '~/types'
 
 export default function EmployeeTable() {
-  const { employees, roleFilter, deleteEmployee, setEditingEmployee } = useEmployees()
+  const { employees, roleFilter, deleteEmployee, setEditingEmployee, isLoading } = useEmployees()
   
   const filteredEmployees = roleFilter
     ? employees.filter(employee => employee.role === roleFilter)
@@ -49,6 +49,7 @@ export default function EmployeeTable() {
       columns={columns}
       actions={actions}
       emptyMessage="No employees found"
+      isLoading={isLoading}
     />
   )
 }

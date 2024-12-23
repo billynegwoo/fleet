@@ -3,7 +3,7 @@ import { useDevices } from '~/contexts/DeviceContext'
 import { Device } from '~/types'
 
 export default function DeviceTable() {
-  const { devices, typeFilter, setEditingDevice, deleteDevice } = useDevices()
+  const { devices, typeFilter, setEditingDevice, deleteDevice, isLoading } = useDevices()
   
   const filteredDevices = typeFilter
     ? devices.filter(device => device.type === typeFilter)
@@ -49,6 +49,7 @@ export default function DeviceTable() {
       columns={columns}
       actions={actions}
       emptyMessage="No devices found"
+      isLoading={isLoading}
     />
   )
 }
