@@ -13,12 +13,14 @@ export default function DeviceTable() {
     {
       header: 'Name',
       accessorKey: (device: Device) => (
-        <div className="font-medium text-gray-900">{device.name}</div>
+        <span className="text-gray-900 dark:text-steampunk-text">
+          {device.name}
+        </span>
       )
     },
     {
       header: 'Type',
-      accessorKey: (device: Device) => device.type
+      accessorKey: 'type'
     },
     {
       header: 'Assigned To',
@@ -30,13 +32,13 @@ export default function DeviceTable() {
     <>
       <button
         onClick={() => setEditingDevice(device)}
-        className="text-sm font-medium text-blue-600 hover:text-blue-900"
+        className="text-sm font-medium text-blue-600 hover:text-blue-900 dark:text-steampunk-accent dark:hover:text-steampunk-hover"
       >
         Edit
       </button>
       <button
         onClick={() => deleteDevice(device.id)}
-        className="text-sm font-medium text-red-600 hover:text-red-900"
+        className="text-sm font-medium text-red-600 hover:text-red-900 dark:text-steampunk-accent dark:hover:text-steampunk-hover"
       >
         Delete
       </button>

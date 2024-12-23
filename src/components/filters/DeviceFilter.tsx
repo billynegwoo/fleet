@@ -1,26 +1,24 @@
 import { useDevices } from "~/contexts/DeviceContext";
+import { Filter } from "~/components/ui/Filter";
+
+const DEVICE_TYPES = [
+  { value: '', label: 'All Types' },
+  { value: 'Laptop', label: 'Laptop' },
+  { value: 'Display', label: 'Display' },
+  { value: 'Peripheral', label: 'Peripheral' },
+  { value: 'Phone', label: 'Phone' }
+];
 
 export default function DeviceFilter() {
   const { typeFilter, setTypeFilter } = useDevices();
 
   return (
-    <div className="flex items-center space-x-4">
-      <label htmlFor="deviceTypeFilter" className="text-sm font-medium">
-        Filter by Type:
-      </label>
-      <select
-        id="deviceTypeFilter"
-        value={typeFilter}
-        onChange={(e) => setTypeFilter(e.target.value)}
-        className="rounded-md border border-gray-300 px-3 py-1"
-      >
-        <option value="">All Types</option>
-        {["Laptop", "Display", "Peripheral", "Phone"].map((type) => (
-          <option key={type} value={type}>
-            {type}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Filter
+      id="deviceTypeFilter"
+      label="Filter by Type"
+      value={typeFilter}
+      onChange={setTypeFilter}
+      options={DEVICE_TYPES}
+    />
   );
 }

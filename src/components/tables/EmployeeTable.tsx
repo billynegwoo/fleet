@@ -13,16 +13,18 @@ export default function EmployeeTable() {
     {
       header: 'Name',
       accessorKey: (employee: Employee) => (
-        <div className="font-medium text-gray-900">{employee.name}</div>
+        <span className="text-gray-900 dark:text-steampunk-text">
+          {employee.name}
+        </span>
       )
     },
     {
       header: 'Role',
-      accessorKey: (employee: Employee) => employee.role
+      accessorKey: 'role'
     },
     {
       header: 'Devices',
-      accessorKey: (employee: Employee) => employee.devices.length
+      accessorKey: (employee: Employee) => employee.devices.length.toString()
     }
   ]
 
@@ -30,13 +32,13 @@ export default function EmployeeTable() {
     <>
       <button
         onClick={() => setEditingEmployee(employee)}
-        className="text-sm font-medium text-blue-600 hover:text-blue-900"
+        className="text-sm font-medium text-blue-600 hover:text-blue-900 dark:text-steampunk-accent dark:hover:text-steampunk-hover"
       >
         Edit
       </button>
       <button
         onClick={() => deleteEmployee(employee.id)}
-        className="text-sm font-medium text-red-600 hover:text-red-900"
+        className="text-sm font-medium text-red-600 hover:text-red-900 dark:text-steampunk-accent dark:hover:text-steampunk-hover"
       >
         Delete
       </button>
