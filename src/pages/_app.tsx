@@ -5,7 +5,7 @@ import { DeviceProvider } from "~/contexts/DeviceContext";
 import { ThemeProvider } from "~/contexts/ThemeContext";
 import { type AppProps } from "next/app";
 import { GeistSans } from "geist/font/sans";
-import { ToasterWithTheme } from "~/components/ui/toaster";
+import { ToasterWithTheme } from "~/components/ui/Toaster";
 import "~/styles/globals.css";
 
 const queryClient = new QueryClient({

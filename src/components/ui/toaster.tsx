@@ -5,7 +5,7 @@ export function ToasterWithTheme() {
   const { theme } = useTheme()
   return (
     <Toaster
-      position="top-right"
+      position="bottom-center"
       richColors
       theme={theme}
       toastOptions={{
