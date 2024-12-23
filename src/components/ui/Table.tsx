@@ -1,6 +1,6 @@
 type Column<T> = {
   header: string
-  accessorKey: ((item: T) => React.ReactNode)
+  accessorKey: ((item: T) => React.ReactNode) | string
   className?: string
 }
 
